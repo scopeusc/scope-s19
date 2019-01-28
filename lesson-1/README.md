@@ -16,7 +16,7 @@ Start Android Studio.
 * Select Browse repositories, select the Flutter plugin and click Install.
 * Click Yes when prompted to install the Dart plugin.
 * Click Restart when prompted.
-* 
+
 If you want to use the iOS simulator instead of the default simulator in Android Studio, you can follow the instructions [here](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk).
 
 ### Creating an App
