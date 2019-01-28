@@ -73,6 +73,7 @@ main() {
 }
 ```
 
+### Important Concepts
 If you've programmed in C or C++ before this code should be pretty readable and intuitive to understand. Below are some important things to keep note of when programming in Dart
 
 * Everything you can place in a variable is an object, and every object is an instance of a class. Even numbers, functions, and null are objects. All objects inherit from the Object class.
@@ -88,3 +89,5 @@ If you've programmed in C or C++ before this code should be pretty readable and 
 * Dart tools can report two kinds of problems: warnings and errors. Warnings are just indications that your code might not work, but they don’t prevent your program from executing. Errors can be either compile-time or run-time. A compile-time error prevents the code from executing at all; a run-time error results in an exception being raised while the code executes.
 
 As we go through different examples and projects thoughout the semester you'll become more familiar with how Dart works and why Flutter chose it as its language of choice for building awesome mobile apps. 
+
+**That's all for this lesson! See you next week :)**
