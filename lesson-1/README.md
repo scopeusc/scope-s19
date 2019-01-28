@@ -16,6 +16,8 @@ Start Android Studio.
 * Select Browse repositories, select the Flutter plugin and click Install.
 * Click Yes when prompted to install the Dart plugin.
 * Click Restart when prompted.
+* 
+If you want to use the iOS simulator instead of the default simulator in Android Studio, you can follow the instructions [here](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk).
 
 ### Creating an App
 Now its time to run our first Flutter app! There is a small default app that is created automatically when a project is created and so we'll use that to test if Flutter is installed and working properly. 
@@ -76,7 +78,7 @@ main() {
 ### Important Concepts
 If you've programmed in C or C++ before this code should be pretty readable and intuitive to understand. Below are some important things to keep note of when programming in Dart
 
-* Everything you can place in a variable is an object, and every object is an instance of a class. Even numbers, functions, and null are objects. All objects inherit from the Object class.
+* Everything you can place in a variable is an object, and every object is an instance of a class. Even numbers, functions, and null are objects. All objects inherit from the [Object](https://api.dartlang.org/stable/2.1.0/dart-core/Object-class.html) class.
 
 * Although Dart is strongly typed, type annotations are optional because Dart can infer types. In the code above, number is inferred to be of type int. When you want to explicitly say that no type is expected, use the special type dynamic.
 
@@ -84,7 +86,7 @@ If you've programmed in C or C++ before this code should be pretty readable and 
 
 * Dart supports top-level functions (such as main()), as well as functions tied to a class or object (static and instance methods, respectively). You can also create functions within functions (nested or local functions).
 
-* Unlike Java, Dart doesn’t have the keywords public, protected, and private. If an identifier starts with an underscore (_), it’s private to its library. For details, see Libraries and visibility.
+* Unlike Java, Dart doesn’t have the keywords public, protected, and private. If an identifier starts with an underscore (_), it’s private to its library. For details, see [Libraries](https://www.dartlang.org/guides/language/language-tour#libraries-and-visibility) and visibility.
 
 * Dart tools can report two kinds of problems: warnings and errors. Warnings are just indications that your code might not work, but they don’t prevent your program from executing. Errors can be either compile-time or run-time. A compile-time error prevents the code from executing at all; a run-time error results in an exception being raised while the code executes.
 
