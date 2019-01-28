@@ -3,14 +3,18 @@
 Welcome to Scope Spring 2019! This semester we'll be learning the Flutter, which is Google's mobile app SDK for crafting high-quality native experiences on both iOS and Android. 
 
 ### Setup
-The first thing we need to do is set up our development environment. There are a couple of different options for this but we'll be following along with Google's recommended setup which is using Android Studio. 
+The first thing we need to do is download and install the Flutter SDK. Depending on your operating system, the steps are a little different but you can follow along with the instructions [here](https://flutter.io/docs/get-started/install/) for your specific OS.
 
+Everyone will need to follow three of steps below in the installation guide from Google before moving on
+* Getting the Flutter SDK
+* Running the command ```flutter doctor```
+* Updating your path
+
+The next step is going to be setting up the development environment and we'll be following along with Google's recommended setup which is using Android Studio. 
 
 You can download Android Studio [here](https://developer.android.com/studio/) if you don't already have it installed.
 
-**If you want to use the iOS simulator instead of the default simulator in Android Studio, you can follow the instructions [here](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk).**
-
-Android Studio doesn't come with Flutter and Dart out of the box so we'll need to install the necessary plugins. 
+Android Studio doesn't come with Flutter and Dart integration out of the box so we'll need to install the necessary plugins. 
 
 To do this follow these steps:
 Start Android Studio.
@@ -19,6 +23,7 @@ Start Android Studio.
 * Click Yes when prompted to install the Dart plugin.
 * Click Restart when prompted.
 
+**If you want to use the iOS simulator instead of the default simulator in Android Studio, you can follow the instructions [here](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk).**
 
 
 ### Creating an App
