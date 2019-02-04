@@ -4,7 +4,7 @@ In this lesson we'll be building a startup name generator with Flutter that will
 ## Part 1
 First we need to create a new Flutter app, which we'll name "startup_generator". This should give you the app that we got running last week. The first thing we're going to do is replace the code in ```main.dart``` with the code below so that we have a simple "Hello World" application.
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
