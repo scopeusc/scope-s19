@@ -1,10 +1,10 @@
 # Lesson #2
 In this lesson we'll be building a startup name generator with Flutter that will introduce many of the core features of the framework and stand as a foundation for some of the other apps we build during the semester. 
 
-## Part 1
+## Part 1 (Hello World)
 First we need to create a new Flutter app, which we'll name "startup_generator". This should give you the app that we got running last week. The first thing we're going to do is replace the code in ```main.dart``` with the code below so that we have a simple "Hello World" application.
 
-```
+```dart
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -42,5 +42,35 @@ In the code above, there are some things worth noting
 
 You'll get more comfortable with the structure of apps in Flutter as we write more code, but if you ever find yourself stuck or wondering what a certain widget does, the [Flutter API Documentation](https://docs.flutter.io/) is a great place to go. 
 
-## Part 2 
-Coming soon...
+## Part 2 (Generating Names)
+We're building a startup name generator, so we need something that can generate random english words for us. Luckily, there are packages for just about anything these days! In the file ```pubspec.yaml``` you'll see the list of current dependencies and so we need to add ```english_words: ^3.1.0``` to that file and then click "Packages get" to download our new package. 
+
+Jumping back to ```main.dart``` we need to import the english_words package with ```import 'package:english_words/english_words.dart';```
+
+Instead of showing "Hello World" when the app loads, we want to change it to show a random startup name. The code below should do it
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final wordPair = new WordPair.random(); // Add this line.
+    return new MaterialApp(
+      title: 'Welcome to Flutter',
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Welcome to Flutter'),
+        ),
+        body: new Center(    // Change "const" to "new".
+          //child: const Text('Hello World'),   // Replace this text...
+          child: new Text(wordPair.asPascalCase),  // With this text.
+        ),
+      ),
+    );
+  }
+}
+```
