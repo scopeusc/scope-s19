@@ -45,6 +45,8 @@ You'll get more comfortable with the structure of apps in Flutter as we write mo
 ## Part 2 (Generating Names)
 We're building a startup name generator, so we need something that can generate random english words for us. Luckily, there are packages for just about anything these days! In the file ```pubspec.yaml``` you'll see the list of current dependencies and so we need to add ```english_words: ^3.1.0``` to that file and then click "Packages get" to download our new package. 
 
+*Note: For other useful packages that can be used with Flutter see https://pub.dartlang.org/* 
+
 Jumping back to ```main.dart``` we need to import the english_words package with ```import 'package:english_words/english_words.dart';```
 
 Instead of showing "Hello World" when the app loads, we want to change it to show a random startup name. The code below should do it
@@ -74,3 +76,121 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+## Part 3 (Infinite Scrolling List)
+All of the widgets we have been dealing with up to this point have been state*less*, meaning that their values are final and immutable. Flutter apps with state*ful* widgets are much more powerful, so let's change our implementation.
+
+Implementing a stateful widget requires at least two classes: 1) a StatefulWidget class that creates an instance of 2) a State class. 
+
+As a basic StatefulWidget Class we can use
+```dart
+class RandomWords extends StatefulWidget {
+  @override
+  RandomWordsState createState() => new RandomWordsState();
+}
+```
+
+ and our basic State Class should be
+ 
+ ```
+ class RandomWordsState extends State<RandomWords> {
+  @override                                  
+  Widget build(BuildContext context) {
+    final WordPair wordPair = new WordPair.random();
+    return new Text(wordPair.asPascalCase);
+  }                                          
+}
+```
+
+Now lets use our new classes to replace our current implementation by setting the ```child``` in the ```body``` to ```new RandomWords()```. If you reload the app now you should see that it still works!
+
+Viewing just one name at a time isn't any fun though. We want to be able to see a list of names and scroll through them to find that perfect two word combo that will send a startup straight to unicorn land. The ```RandomWords``` widget is controlling what's on the screen so we'll need to add a few methods to that class to get it generating a list. 
+
+First we'll add two variables to our class 
+```dart
+final List<WordPair> _suggestions = <WordPair>[];
+final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
+```
+
+We also need a function that will generate names as we scroll, so let's create that.
+
+```dart
+Widget _buildSuggestions() {
+    return new ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      // The itemBuilder callback is called once per suggested 
+      // word pairing, and places each suggestion into a ListTile
+      // row. For even rows, the function adds a ListTile row for
+      // the word pairing. For odd rows, the function adds a 
+      // Divider widget to visually separate the entries. Note that
+      // the divider may be difficult to see on smaller devices.
+      itemBuilder: (BuildContext _context, int i) {
+        // Add a one-pixel-high divider widget before each row 
+        // in the ListView.
+        if (i.isOdd) {
+          return new Divider();
+        }
+
+        // The syntax "i ~/ 2" divides i by 2 and returns an 
+        // integer result.
+        // For example: 1, 2, 3, 4, 5 becomes 0, 1, 1, 2, 2.
+        // This calculates the actual number of word pairings 
+        // in the ListView,minus the divider widgets.
+        final int index = i ~/ 2;
+        // If you've reached the end of the available word
+        // pairings...
+        if (index >= _suggestions.length) {
+          // ...then generate 10 more and add them to the 
+          // suggestions list.
+          _suggestions.addAll(generateWordPairs().take(10));
+        }
+        return _buildRow(_suggestions[index]);
+      }
+    );
+  }
+  ```
+
+That function calls another function ```_buildRow``` which creates a row of our list for each name generated.
+
+```dart
+Widget _buildRow(WordPair pair) {
+    return new ListTile(
+      title: new Text(
+        pair.asPascalCase,
+        style: _biggerFont,
+      ),
+    );
+  }
+```
+
+Now that we have functions for building our list we need to update the ```build``` method for ```RandomWordsState``` to use our functions instead of directly calling the word generation library. 
+
+```dart
+@override
+  Widget build(BuildContext context) {
+    //final wordPair = new WordPair.random(); // Delete these... 
+    //return new Text(wordPair.asPascalCase); // ... two lines.
+
+    return new Scaffold (                   // Add from here... 
+      appBar: new AppBar(
+        title: new Text('Startup Name Generator'),
+      ),
+      body: _buildSuggestions(),
+    );                                      // ... to here.
+  }
+  ```
+  
+  Lastly, lets update the ```MyApp``` build function and change the home to our ```RandomWords``` widget.
+  
+  ```dart
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Startup Name Generator',
+      home: new RandomWords(),
+    );
+  }
+  ```
+  If you reload the app now you should get an infinite list of startup names! Now you can scroll to your heart's content. 
+  
+  Congratulations on creating your first **real** Flutter app :smiley: The concepts in this lesson will be useful in the weeks going forward and you can always look back at the code from previous weeks for reference in your projects. 
