@@ -1,2 +1,2 @@
 # Lesson 2 - Finished code
-This directory contains the finished code for lesson 2. It is runnable. Feel free to use this project as a reference guide.
+This directory contains the finished main.dart code that is needed for lesson 2. If you have a Flutter project open you just need to replace the code in main.dart with the code given and then download the configure the english_words library.
