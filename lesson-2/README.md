@@ -194,3 +194,6 @@ Now that we have functions for building our list we need to update the ```build`
   If you reload the app now you should get an infinite list of startup names! Now you can scroll to your heart's content. 
   
   Congratulations on creating your first **real** Flutter app :smiley: The concepts in this lesson will be useful in the weeks going forward and you can always look back at the code from previous weeks for reference in your projects. 
+  
+  ## Extra Material
+  If you're interested on developing this app further Google has a tutorial that will walk you through adding other features and UI improvements that picks up where we left off [here](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2/index.html?index=..%2F..index#3). Show us the completed app next week for bonus points :thumbsup: :clap: :v:
