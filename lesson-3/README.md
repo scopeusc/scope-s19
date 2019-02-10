@@ -342,7 +342,244 @@ That seems like a lot of code...but actually we just defined a grid with some bu
 
 Congratulations! Now you should see the UI of a calculator on your screen!
 ## Part 2 - Adding the logic (How the calculator works)
-Todo
+We are going to use states in this part of the lesson. Since we originally defined our `MainPage` as a `StatelessWidget`, we need to convert it into a `StatefulWidget`. Android Studio actually has a quick shortcut. Hover your cursor on `MainPage`, click the light bulb, and you should see an option to convert `MainPage` to a `StatefulWidget`. Interestingly, you see that the parameters we defined in the original `MainPage` stayed in the `MainPage`, while the build method has been moved to a new class called `MainPageState`. As a result, the paramters we used before like `this.utilColor` has also been changed to `this.widget.utilColor` automatically. Cool!
+
+Right now, our buttons are merely `Container`s, so they are just some static graphics. We need to make them clickable by adding a `GestureDetector`. Firstly, let's define an callback called `onTap` in `Button`. The value of `onTap` will be passed in through `Button`'s constructor:
+
+```dart
+final Color bgColor;
+final Color textColor;
+final double textSize;
+final String text;
+final void Function() onTap; // declare member variable
+
+Button({Key key,
+  this.bgColor,
+  this.textColor,
+  this.text,
+  this.textSize,
+  this.onTap,    // get value through Button constructor
+}) : super(key: key);
+```
+
+We should also change the `build` function of the `Button` class to the following.
+
+```dart
+@override
+Widget build (BuildContext context) {
+  return GestureDetector(
+    onTap: this.onTap,
+    child: Container(
+      margin: EdgeInsets.all(10),
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(1000),
+        color: this.bgColor,
+      ),
+      child: Center(
+        child: Text(
+          this.text,
+          style: TextStyle(
+            fontSize: this.textSize,
+            color: this.textColor,
+            fontWeight: FontWeight.w200,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+```
+
+All we did is to wrap the entire button widgets in a `GestureDetector` and link the `onTap` action of `GestureDetector` to our `Button`'s `onTap` action. Everything should still compile and run without any visual changes.
+
+Now we can finally add the calculator logic to the buttons! The logic of a calculator is actually fairly complicated, so we are making a simplified version here just to demonstrate that the buttons work. It works in general, but there are some bugs in some edge cases and some more advanced features are missing. Feel free to implement them on your own!
+
+Add the following memeber variables and functions to your `MainPageState`:
+
+```dart
+double prev = 0;
+double curr = 0;
+String operator = '+';
+int decimalOffset = 0;
+
+onNumTap(int num) {
+  setState(() {
+    if(decimalOffset == 0) {
+      this.curr = this.curr * 10 + num;
+    } else {
+      this.curr = this.curr + num * pow(10, -decimalOffset);
+      ++this.decimalOffset;
+    }
+  });
+}
+
+onDecimalTap() {
+  setState(() {
+    if(this.decimalOffset == 0) {
+      this.decimalOffset = 1;
+    }
+  });
+}
+
+onOperatorTap(String operator) {
+  setState(() {
+    this.operator = operator;
+    this.prev = this.curr;
+    this.curr = 0;
+    this.decimalOffset = 0;
+  });
+}
+
+onClearTap() {
+  setState(() {
+    this.prev = 0;
+    this.curr = 0;
+    this.operator = '+';
+    this.decimalOffset = 0;
+  });
+}
+
+onEqualTap() {
+  setState((){
+    switch(this.operator) {
+      case '+':
+        this.curr = this.prev + this.curr;
+        break;
+      case '-':
+        this.curr = this.prev - this.curr;
+        break;
+      case '*':
+        this.curr = this.prev * this.curr;
+        break;
+      case '/':
+      default:
+        this.curr = this.prev / this.curr;
+        break;
+    }
+  });
+}
+
+onNegateTap() {
+  setState(() {
+    this.curr *= -1;
+  });
+}
+
+onPercentTap() {
+  setState(() {
+    this.curr /= 100;
+  });
+}
+```
+
+The functions are self-explanatory. Now let's connect these functions to our buttons. Rewrite the `AspectRatio` widget in the `build` function of `MainPageState`:
+
+```dart
+AspectRatio(
+  aspectRatio: 1 / 5 * 4,
+  child: Column(
+    children: <Widget>[
+      Expanded(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Button(bgColor: this.widget.utilColor, textColor: this.widget.utilTextColor, text: "C", textSize: 30, onTap: onClearTap),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.utilColor, textColor: this.widget.utilTextColor, text: "+/-", textSize: 30, onTap: onNegateTap),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.utilColor, textColor: this.widget.utilTextColor, text: "%", textSize: 30, onTap: onPercentTap),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.opColor, textColor: this.widget.opTextColor,  text: "÷", textSize: 40, onTap: () => onOperatorTap('/')),
+            ),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "7", textSize: 35, onTap: () => onNumTap(7)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "8", textSize: 35, onTap: () => onNumTap(8)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "9", textSize: 35, onTap: () => onNumTap(9)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.opColor, textColor: this.widget.opTextColor, text: "×", textSize: 40, onTap: () => onOperatorTap('*')),
+            ),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "4", textSize: 35, onTap: () => onNumTap(4)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "5", textSize: 35, onTap: () => onNumTap(5)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "6", textSize: 35, onTap: () => onNumTap(6)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.opColor, textColor: this.widget.opTextColor, text: "-", textSize: 40, onTap: () => onOperatorTap('-')),
+            ),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "1", textSize: 35, onTap: () => onNumTap(1)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "2", textSize: 35, onTap: () => onNumTap(2)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "3", textSize: 35, onTap: () => onNumTap(3)),
+            ),
+            Expanded(
+              child: Button(bgColor: this.widget.opColor, textColor: this.widget.opTextColor, text: "+", textSize: 40, onTap: () => onOperatorTap('+')),
+            ),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Row(
+          children: <Widget>[
+            Flexible(
+              flex: 2,
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: "0", textSize: 30, onTap: () => onNumTap(0)),
+            ),
+            Flexible(
+              flex: 1,
+              child: Button(bgColor: this.widget.numColor, textColor: this.widget.numTextColor, text: ".", textSize: 30, onTap: onDecimalTap),
+            ),
+            Flexible(
+              flex: 1,
+              child: Button(bgColor: this.widget.opColor, textColor: this.widget.opTextColor, text: "=", textSize: 40, onTap: onEqualTap),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+There you have it! A working calculator!
 
 ## Bonus Challenges
-Todo
+* Implement AC/C
+* Fix the bug: If you click a number button right after you press the equal button, unexpected behavior occurs. This unintended behavior is especially weird with the decimal button
+* Add animations to the buttons on tap (You can research more about `AnimationController` and `InkWell`)
+* Using `double` to store the numbers can be problematic. Can you come up with a better approach?
