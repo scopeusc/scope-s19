@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
 
 At this point you should have successfully drawn red `SafeArea` in a black canvas! We are going to draw our calculator widgets inside the `SafeArea` widget in `MainPage`, so that our UI can render without any obstructions.
 
-![SafeArea](screenshots/safearea.png "SafeArea")
+<img src="screenshots/safearea.png" width="250"/>
 
 Now let us think about how to structure the layout of our app. You can see that the iOS calculator has a 4x5 grid of buttons. Therefore, we define a `AspectRatio` widget with the aspect ratio `4 / 5`, because the ratio of width:height is 4:5. We also define an `Expanded` widget to make the calculator result display to fill the rest of the screen. Both `Expanded` and `AspectRatio` widgets should be children of a `Column` widget, because our app has a vertical layout.
 
@@ -113,7 +113,7 @@ Widget build(BuildContext context) {
 ```
 You should see that the screen has been separated into a red area and a yellow area. We will make the red area display the calculator output and the yellow area display the buttons.
 
-![Separation](screenshots/separation.png "Separation")
+<img src="screenshots/separation.png" width="250"/>
 
 Let's first display the calculator output. Change the Expanded widget to the following
 ```dart
@@ -142,7 +142,7 @@ Expanded(
 ),
 ```
 
-![Output](screenshots/output.png "Output")
+<img src="screenshots/output.png" width="250"/>
 
 We put a `Container` widget inside the `Expanded` widget. The `Container` has the same size as the `Expanded` because we set both of its width and height to infinity. The `Container` also has a padding of `20` units. Next, we displayed a hardcoded `0` as our calculator output. The `0` is shown in the bottom-right corner because we defined a column with both of its `mainAxisAlignment` and `crossAxisAlignment` set to `end`. We also made sure that the calculator output does not overflow the screen by putting the `Text` widget inside a `FittedBox` widget. Finally, we also gave the `Text` widget a color, size, and boldness.
 
@@ -200,7 +200,7 @@ AspectRatio(
 )
 ```
 
-![Button](screenshots/button.png "Button")
+<img src="screenshots/button.png" width="250"/>
 
 Looks good! Before we add the buttons, let's do one more thing. Define the color and text of the buttons as parameters of `MainPage`, so we can easily change the theme of our calculator later.
 
@@ -338,7 +338,7 @@ AspectRatio(
 
 That seems like a lot of code...but actually we just defined a grid with some buttons :)
 
-![Scope Calculator](screenshots/scope_theme.png "Scope Calculator")
+<img src="screenshots/scope_theme.png" width="250"/>
 
 Congratulations! Now you should see the UI of a calculator on your screen!
 ## Part 2 - Adding the logic (How the calculator works)
