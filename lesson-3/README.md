@@ -1,13 +1,7 @@
 # Lesson 3 - Calculator: Containers, Layouts & States
 In this lesson, we will replicate iOS's built-in calculator. You will learn about how to create the layout of your app and style them as well as how to utilize stateful widgets to add logic to your app. Checkout the screenshots below!
 
-<img src="screenshots/default_theme.png" width="150">
-&nbsp;
-&nbsp;
-<img src="screenshots/scope_theme.png" width="150">
-&nbsp;
-&nbsp;
-<img src="screenshots/usc_theme.png" width="150">
+<img src="screenshots/default_theme.png" width="150">&nbsp;&nbsp;<img src="screenshots/scope_theme.png" width="150">&nbsp;&nbsp;<img src="screenshots/usc_theme.png" width="150">
 
 
 Before we get started, we need to do a quick review of widgets (and introduce you to many new ones).
