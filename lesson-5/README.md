@@ -1,4 +1,4 @@
-# Lesson # - Lesson Name
+# Lesson 5 - API Fetching: Weather App
 Todo
 
 ## Part 1 - Part Name
