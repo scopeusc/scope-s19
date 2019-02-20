@@ -3,11 +3,11 @@
 This is the Scope Spring 2019 GitHub curriculum repository! Here you'll find projects and resources that will help you learn Flutter throughout the semester. Here you'll find a folder for every lesson. Within each folder is a project and a `README.md` that will guide you step-by-step on how to build the project for that lesson.
 
 ### Curriculum Outline
-* [**Lesson 1**](lesson-1): Dev environment setup & Introduction to Dart
-* [**Lesson 2**](lesson-2): Startup name generator - Scaffold
-* [**Lesson 3**](lesson-3): Calculator - Containers, Layouts & States
-* [**Lesson 4**](lesson-4): Nearby Restaurants Explorer - Google Maps & URL Launcher
-* [**Lesson 5**](lesson-5): Weather App - API Fetching
+* [**Lesson 1**](lesson-1) - Dev environment setup & Introduction to Dart
+* [**Lesson 2**](lesson-2) - Startup name generator: Scaffold
+* [**Lesson 3**](lesson-3) - Calculator: Containers, Layouts & States
+* [**Lesson 4**](lesson-4) - Nearby Restaurants Explorer: Google Maps & URL Launcher
+* [**Lesson 5**](lesson-5) - Weather App: API Fetching
 
 ### Using This Repo
 To use this repo properly, first follow [lesson 1](lesson-1/README.md) to get Git, Android Studio, Dart, Flutter, and the right environment setup on your machine.
