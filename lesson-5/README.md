@@ -1,4 +1,4 @@
-# Lesson 5 – API Fetching: Weather App
+# Lesson 5 – Weather App: API Fetching
 For our last lesson, we will be building a Flutter application to fetch and parse weather data from MetaWeather.
 
 ## Part 1 - Visit the MetaWeather Docs
