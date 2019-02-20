@@ -14,6 +14,10 @@ Select `Maps` and click `continue`
 
 <img src="screenshots/project.png" width="400"/>
 
+If you see this error msg, switch to a non-usc email address and try again. 
+
+<img src="screenshots/error.png" width="400"/>
+
 Create a new project, give it a name, agree to Google's Terms of Service, and click `next`
 
 <img src="screenshots/billing.png" width="400"/>
