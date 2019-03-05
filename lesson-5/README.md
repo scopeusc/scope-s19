@@ -184,6 +184,11 @@ class ForecastItem extends StatelessWidget {
 ```
 
 ## Part 4 - Putting It All Together
+So far, we've focused on building our model (the structures that we'll be using to store the responses from the MetaWeather API) and our widgets (the smaller components of our UI that we'll use to organize how we present information to the user).  Last but not least, we'll be building out the entry point of our application (`main.dart`).
+
+Open up `weather_app/main.dart`.  You'll likely see skeleton code that Android Studio generates for you when creating a new project.  *Go ahead and remove all of this; we'll be building the Flutter application from the ground up.*
+
+
 
 ## Bonus Challenges
 TODO
