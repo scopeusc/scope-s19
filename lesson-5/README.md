@@ -36,6 +36,27 @@ We'll be three classes to represent the data that we retrieve from the MetaWeath
 Begin by launching Android Studio and creating a new Flutter Application.  In order to use the same imports listed in our code snippets, be sure to name your Flutter Application `weather_app`.
 
 ### LocationData Class
-As we mentioned in the API introduction, our first call to the MetaWeather endpoints will be passing in a latitude and a longitude to obtain the desired location's WOEID ("Where On Earth ID").
+As we mentioned in the API introduction, our first call to the MetaWeather endpoints will be passing in a latitude and a longitude to obtain the desired location's WOEID ("Where On Earth ID").  Along with the the WOEID, we'll also want to save the title of the location, in order to display it within our Flutter application.
+
+Create a folder within weather_app/lib called `models` and create a new Dart file with the following contents:
+```dart
+class LocationData {
+  final String title;
+  final int woeid;
+
+  LocationData({this.title,this.woeid});
+
+  factory LocationData.fromJson(List<dynamic> json) {
+    return LocationData(
+      title: json[0]['title'],
+      woeid: json[0]['woeid']
+    );
+  }
+
+  int getWOEID() {
+    return woeid;
+  }
+}
+```
 ## Bonus Challenges
 TODO
