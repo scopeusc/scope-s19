@@ -85,12 +85,41 @@ class WeatherData {
 
 ### ForecastData Class
 
+```dart
+import 'package:weather_app/models/WeatherData.dart';
+
+class ForecastData {
+  final List list;
+
+  ForecastData({this.list});
+
+  factory ForecastData.fromJson(Map<String, dynamic> json) {
+    List list = new List();
+
+    for (dynamic e in json['consolidated_weather']) {
+      WeatherData w = new WeatherData(
+          date: DateTime.parse(e['applicable_date'].toString()),
+          name: json['title'],
+          temp: e['the_temp'].toDouble() * 1.8 + 32,
+          main: e['weather_state_name'],
+          icon: e['weather_state_abbr']);
+      list.add(w);
+    }
+
+    return ForecastData(
+      list: list,
+    );
+  }
+}
+```
+
 ## Part 3 – Building Our Weather Widgets
 
 ### Weather Widget
 Next, we'll be building a widget to display information from our `WeatherData` class in a presentable fashion.  This will be the front-and-center visual component of our application.
 
-Start off by creating a folder for widgets within the weather_app/lib folder of your project.  Our first widget will be called `Weather.dart`.
+Start off by creating a folder called `widgets` within the weather_app/lib folder of your project.  Our first widget will be named `Weather.dart`.
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -116,7 +145,43 @@ class Weather extends StatelessWidget {
   }
 }
 ```
+
 ### WeatherItem Widget
+In addition to the Weather widget, we'll also be building a widget to represent forecast weather data.  This will be displayed below the main Weather widget in our application.
+
+Like the last widget, we'll be building this one within weather_app/lib/widgets.  We'll be naming this one `ForecastItem.dart`.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/models/WeatherData.dart';
+
+class WeatherItem extends StatelessWidget {
+  final WeatherData weather;
+
+  WeatherItem({Key key, @required this.weather}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(weather.name, style: new TextStyle(color: Colors.black)),
+            Text(weather.main, style: new TextStyle(color: Colors.black, fontSize: 24.0)),
+            Text('${weather.temp.toStringAsFixed(0)}°C',  style: new TextStyle(color: Colors.black)),
+            SvgPicture.network('https://www.metaweather.com/static/img/weather/${weather.icon}.svg'),
+            Text(new DateFormat.yMMMd().format(weather.date), style: new TextStyle(color: Colors.black)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Part 4 - Putting It All Together
 
