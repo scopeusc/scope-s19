@@ -9,7 +9,7 @@ In order to request the current weather information for a particular location, w
 
 The respective URL endpoint for this query is: `https://www.metaweather.com/api/location/search/?query=(query)`.  You'll need to reference this later on.
 
-*Example Usage:* [](https://www.metaweather.com/api/location/search/?query=los%20angeles)
+*Example Usage:* [https://www.metaweather.com/api/location/search/?query=los%20angeles]
 
 MetaWeather's response fields (for a string query) include:
 
@@ -27,7 +27,7 @@ As some further background on the MetaWeather API, after obtaining the WOEID the
 
 The respective URL endpoint for this query is `https://www.metaweather.com/api/location/(woeid)/`
 
-*Example Usage:* [](https://www.metaweather.com/api/location/2487956/)
+*Example Usage:* [https://www.metaweather.com/api/location/2487956/]
 
 ## Part 2 - Part Name
 TODO
