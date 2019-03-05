@@ -38,7 +38,7 @@ Begin by launching Android Studio and creating a new Flutter Application.  In or
 ### LocationData Class
 As we mentioned in the API introduction, our first call to the MetaWeather endpoints will be passing in a latitude and a longitude to obtain the desired location's WOEID ("Where On Earth ID").  Along with the the WOEID, we'll also want to save the title of the location, in order to display it within our Flutter application.
 
-Create a folder within weather_app/lib called `models` and create a new Dart file with the following contents:
+Create a folder within weather_app/lib called `models` and create a new Dart file called `LocationData.dart` with the following contents:
 ```dart
 class LocationData {
   final String title;
@@ -52,9 +52,33 @@ class LocationData {
       woeid: json[0]['woeid']
     );
   }
+}
+```
 
-  int getWOEID() {
-    return woeid;
+As you can see, our constructor takes the two parameters we mentioned (title and WOEID).  The values of these parameters are obtained by parsing the json response that we'll receive from the MetaWeather API.
+
+### WeatherData Class
+Next, we'll be working on a class to save the basic, weather-related information for a given date.  We'll call this class `WeatherData.dart`, storing it in weather_app/lib/models, too.
+
+```dart
+class WeatherData {
+  final DateTime date;
+  final String name;
+  final double temp;
+  final String main;
+  final String icon;
+
+  WeatherData({this.date,this.name, this.temp, this.main, this.icon});
+
+  factory WeatherData.fromJson(Map<String, dynamic> json) {
+    final jsonRow = json['consolidated_weather'][0];
+    return WeatherData(
+      date: DateTime.parse(jsonRow['applicable_date'].toString()),
+      name: json['title'],
+      temp: jsonRow['the_temp'].toDouble() * 1.8 + 32,
+      main: jsonRow['weather_state_name'],
+      icon: jsonRow['weather_state_abbr']
+    );
   }
 }
 ```
