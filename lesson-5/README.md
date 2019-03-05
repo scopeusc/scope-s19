@@ -35,6 +35,16 @@ We'll be three classes to represent the data that we retrieve from the MetaWeath
 ### Project Setup
 Begin by launching Android Studio and creating a new Flutter Application.  In order to use the same imports listed in our code snippets, be sure to name your Flutter Application `weather_app`.
 
+After your application is setup, we'll quickly add some dependencies to your `pubspec.yaml` file.  Go ahead and add the following lines to that file, within the `dependencies` section:
+
+```yaml
+  http: "^0.11.3+16"
+
+  intl: "^0.15.6"
+
+  flutter_svg: "^0.11.0+1"
+```
+
 ### LocationData Class
 As we mentioned in the API introduction, our first call to the MetaWeather endpoints will be passing in a latitude and a longitude to obtain the desired location's WOEID ("Where On Earth ID").  Along with the the WOEID, we'll also want to save the title of the location, in order to display it within our Flutter application.
 
@@ -187,6 +197,20 @@ class ForecastItem extends StatelessWidget {
 So far, we've focused on building our model (the structures that we'll be using to store the responses from the MetaWeather API) and our widgets (the smaller components of our UI that we'll use to organize how we present information to the user).  Last but not least, we'll be building out the entry point of our application (`main.dart`).
 
 Open up `weather_app/main.dart`.  You'll likely see skeleton code that Android Studio generates for you when creating a new project.  *Go ahead and remove all of this; we'll be building the Flutter application from the ground up.*
+
+### Imports
+We'll begin by adding the necessary imports for our application to run.  Paste the below import statements at the top of your `main.dart` file.
+
+```dart
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:weather_app/widgets/Weather.dart';
+import 'package:weather_app/widgets/ForecastItem.dart';
+import 'package:weather_app/models/WeatherData.dart';
+import 'package:weather_app/models/ForecastData.dart';
+import 'package:weather_app/models/LocationData.dart';
+```
 
 
 
