@@ -82,5 +82,16 @@ class WeatherData {
   }
 }
 ```
+
+### ForecastData Class
+
+## Part 3 – Building Our Weather Widgets
+
+### Weather Widget
+
+### WeatherItem Widget
+
+## Part 4 - Putting It All Together
+
 ## Bonus Challenges
 TODO
