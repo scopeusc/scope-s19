@@ -14,6 +14,7 @@ Example Usage: /api/location/search/?query=los%20angeles
 ```
 
 MetaWeather's response fields (for a string query) include:
+
 | Field        | Type  |
 |:------------:|:-----:|
 | title        | string|
