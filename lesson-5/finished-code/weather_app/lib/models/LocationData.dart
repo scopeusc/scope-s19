@@ -10,8 +10,4 @@ class LocationData {
       woeid: json[0]['woeid']
     );
   }
-
-  int getWOEID() {
-    return woeid;
-  }
 }
