@@ -76,7 +76,7 @@ class MyAppState extends State<MyApp> {
                           child: forecastData != null ? ListView.builder(
                               itemCount: forecastData.list.length,
                               scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) => WeatherItem(weather: forecastData.list.elementAt(index))
+                              itemBuilder: (context, index) => ForecastItem(weather: forecastData.list.elementAt(index))
                           ) : Container(),
                         ),
                       ),

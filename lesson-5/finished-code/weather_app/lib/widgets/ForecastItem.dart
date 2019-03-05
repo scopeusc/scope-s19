@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/models/WeatherData.dart';
 
-class WeatherItem extends StatelessWidget {
+class ForecastItem extends StatelessWidget {
   final WeatherData weather;
 
-  WeatherItem({Key key, @required this.weather}) : super(key: key);
+  ForecastItem({Key key, @required this.weather}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

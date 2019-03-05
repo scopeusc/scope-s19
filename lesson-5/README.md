@@ -146,7 +146,7 @@ class Weather extends StatelessWidget {
 }
 ```
 
-### WeatherItem Widget
+### ForecastItem Widget
 In addition to the Weather widget, we'll also be building a widget to represent forecast weather data.  This will be displayed below the main Weather widget in our application.
 
 Like the last widget, we'll be building this one within weather_app/lib/widgets.  We'll be naming this one `ForecastItem.dart`.
@@ -157,10 +157,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/models/WeatherData.dart';
 
-class WeatherItem extends StatelessWidget {
+class ForecastItem extends StatelessWidget {
   final WeatherData weather;
 
-  WeatherItem({Key key, @required this.weather}) : super(key: key);
+  ForecastItem({Key key, @required this.weather}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
