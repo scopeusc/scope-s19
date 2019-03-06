@@ -292,6 +292,94 @@ Our build method will take care of setting up all of the UI elements.  This UI w
     );
 ```
 
+Within the children list above (of type widget), we'll be creating a widget for the main weather display.  Add the following widget to the list of children:
+
+```dart
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: weatherData != null ? Weather(weather: weatherData) : Container(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: isLoading ? CircularProgressIndicator(
+                              strokeWidth: 2.0,
+                              valueColor: new AlwaysStoppedAnimation(Colors.white),
+                            ) : IconButton(
+                              icon: new Icon(Icons.refresh),
+                              tooltip: 'Refresh',
+                              onPressed: loadWeather,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+```
+
+Additionally, we'll be displaying a card showing each weather data from each element of the ForecastData class.  Add a comma after your last widget, and include this widget after it:
+
+```dart
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 200.0,
+                          child: forecastData != null ? ListView.builder(
+                              itemCount: forecastData.list.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) => ForecastItem(weather: forecastData.list.elementAt(index))
+                          ) : Container(),
+                        ),
+                      ),
+                    )
+```
+
+#### loadWeather()
+This method is where our calls to the MetaWeather API go.  We'll be using the endpoints detailed above to request the weather data at USC's latitude and longitude.  The following code snippet:
+1. Makes a call to the MetaWeather API using USC's latitude and longitude to get our WOEID.
+2. Verifies that a response was received and no error status codes were returned.
+3. Makes two more calls to the MetaWeather API to acquire the current and forecast weather information.
+4. Constructs the `weatherData` and `forecastData` instances.
+
+Include the following code snippet withing `loadWeather()`:
+```dart
+    setState(() {
+      isLoading = true;
+    });
+
+    final lat = 34.0224;
+    final lon = -118.2851;
+    final locationResponse = await http.get('https://www.metaweather.com/api/location/search/?lattlong=${lat.toString()},${lon.toString()}');
+    if (locationResponse.statusCode == 200) {
+      locationData = new LocationData.fromJson(jsonDecode(locationResponse.body));
+      final weatherResponse = await http.get(
+          'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
+      final forecastResponse = await http.get(
+          'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
+      if (weatherResponse.statusCode == 200 &&
+          forecastResponse.statusCode == 200) {
+        return setState(() {
+          weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
+          forecastData = new ForecastData.fromJson(jsonDecode(forecastResponse.body));
+          isLoading = false;
+        });
+      }
+    }
+    setState(() {
+      isLoading = false;
+    });
+```
+
+## Part 5 - Test It Out!
+At this point, you should have all that you need to build your code and deploy it to a simulator (or your own device).  Save and run your application, and work on debugging any small issues that you may have!  
+
+Congratulations on completing the final Flutter lesson for the semester!
+
 ## Bonus Challenges
- - Include high/low temperatures for each day that the weather is listed
- - Allow the user to select either Fahrenheit or Celsius as the unit for degrees
+ - Include high/low temperatures for each day that the weather is listed!
+ - Allow the user to select either Fahrenheit or Celsius as the unit for degrees!
+ - Detect your phone's location and replace USC's lat/long with your own!
