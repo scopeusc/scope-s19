@@ -266,7 +266,31 @@ Replace the empty body of your `initState()` with the following:
     loadWeather();
 ```
 
+#### build()
+Our build method will take care of setting up all of the UI elements.  This UI will consist of a MaterialApp with a title, theme, and home attribute.  Inside of our MaterialApp, we'll include Widgets within a centered, scaffolded, column.  Within the body of our `build()` method, we can get started with the code below as a foundation for our user interface.  This will appear similar to the code we've started with in the previous lessons.
 
+```dart
+    return MaterialApp(
+      title: 'Weather App: API Fetching',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+          backgroundColor: Colors.blueGrey,
+          appBar: AppBar(
+            title: Text('Weather App: API Fetching'),
+          ),
+          body: Center(
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    // Adding our widgets here...
+                  ]
+              )
+          )
+      ),
+    );
+```
 
 ## Bonus Challenges
 TODO
