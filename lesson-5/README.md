@@ -132,6 +132,8 @@ class ForecastData {
 }
 ```
 
+The `ForecastData class` is simply a wrapper for a collection of WeatherData items, obtained via json-parsing.
+
 ## Part 3 – Building Our Weather Widgets
 
 ### Weather Widget
