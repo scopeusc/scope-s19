@@ -211,6 +211,8 @@ class ForecastItem extends StatelessWidget {
 }
 ```
 
+Our `ForecastItem` includes similar children widgets to our `Weather` widget.
+
 ## Part 4 - Putting It All Together
 So far, we've focused on building our model (the structures that we'll be using to store the responses from the MetaWeather API) and our widgets (the smaller components of our UI that we'll use to organize how we present information to the user).  Last but not least, we'll be building out the entry point of our application (`main.dart`).
 
