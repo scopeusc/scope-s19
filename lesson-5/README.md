@@ -212,7 +212,49 @@ import 'package:weather_app/models/ForecastData.dart';
 import 'package:weather_app/models/LocationData.dart';
 ```
 
+### MyApp Class
+Next, we'll construct the main class for the application.  We'll be using a **Stateful Widget** for our application, in order to display dynamic data.  Our main class will call `createState()`, which we'll create next.
 
+Include the following code after your import statements.  Notice that we've appended a line to point our main method at the constructor for MyApp.
+
+```dart
+void main() => runApp(new MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new MyAppState();
+  }
+}
+```
+
+### MyApp State
+With our main class now setup, we'll get started on constructing the state.  Below is an outline of what our state will look like.
+
+Please include the following skeleton code after your `MyApp` class:
+
+```dart
+class MyAppState extends State<MyApp> {
+  bool isLoading = false;
+  LocationData locationData;
+  WeatherData weatherData;
+  ForecastData forecastData;
+  
+  @override
+  void initState() {
+    
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    
+  }
+  
+  loadWeather() async {
+    
+  }
+}
+```
 
 ## Bonus Challenges
 TODO
