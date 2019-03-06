@@ -95,6 +95,13 @@ class WeatherData {
 }
 ```
 
+As you can see, this class includes 5 member variables:
+- `date`: this specifies the date to which the current weather information pertains
+- `name`: this specifies the name of the location queried
+- `temp`: this specifies the current temperature at that location
+- `main`: this specifies the current weather conditions at that location
+- `icon`: this specifies the suffix to the corresponding icon URL
+
 ### ForecastData Class
 
 ```dart
