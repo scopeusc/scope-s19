@@ -45,6 +45,8 @@ After your application is setup, we'll quickly add some dependencies to your `pu
   flutter_svg: "^0.11.0+1"
 ```
 
+Be sure to save the file and click the "Get Dependencies" button (top center of Android Studio) afterwards!
+
 ### LocationData Class
 As we mentioned in the API introduction, our first call to the MetaWeather endpoints will be passing in a latitude and a longitude to obtain the desired location's WOEID ("Where On Earth ID").  Along with the the WOEID, we'll also want to save the title of the location, in order to display it within our Flutter application.
 
