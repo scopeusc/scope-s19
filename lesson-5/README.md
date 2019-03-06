@@ -132,7 +132,7 @@ class ForecastData {
 }
 ```
 
-The `ForecastData class` is simply a wrapper for a collection of WeatherData items, obtained via json-parsing.
+The `ForecastData` class is simply a wrapper for a collection of WeatherData items, obtained via json-parsing.
 
 ## Part 3 – Building Our Weather Widgets
 
@@ -166,6 +166,13 @@ class Weather extends StatelessWidget {
   }
 }
 ```
+
+Within our `Weather` widget, we have a column of children widgets including:
+- Text for the location name
+- Text for the weather conditions
+- Text for the current temperature
+- An SVG (image) for the current conditions
+- Text for the corresponding date
 
 ### ForecastItem Widget
 In addition to the Weather widget, we'll also be building a widget to represent forecast weather data.  This will be displayed below the main Weather widget in our application.
