@@ -314,6 +314,9 @@ Our build method will take care of setting up all of the UI elements.  This UI w
 
 Within the children list above (of type widget), we'll be creating a widget for the main weather display.  Add the following widget to the list of children:
 
+<img src="screenshots/main.png" width="150"/>
+
+
 ```dart
                     Expanded(
                       child: Column(
@@ -341,6 +344,8 @@ Within the children list above (of type widget), we'll be creating a widget for 
 ```
 
 Additionally, we'll be displaying a card showing each weather data from each element of the ForecastData class.  Add a comma after your last widget, and include this widget after it:
+
+<img src="screenshots/cards.png" width="150"/>
 
 ```dart
                     SafeArea(
