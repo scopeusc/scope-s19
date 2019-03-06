@@ -293,4 +293,5 @@ Our build method will take care of setting up all of the UI elements.  This UI w
 ```
 
 ## Bonus Challenges
-TODO
+ - Include high/low temperatures for each day that the weather is listed
+ - Allow the user to select either Fahrenheit or Celsius as the unit for degrees
