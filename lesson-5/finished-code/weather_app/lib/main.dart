@@ -95,7 +95,6 @@ class MyAppState extends State<MyApp> {
 
     final lat = 34.0224;
     final lon = -118.2851;
-//    print('https://www.metaweather.com/api/location/search/?lattlong=${lat.toString()},${lon.toString()}');
     final locationResponse = await http.get('https://www.metaweather.com/api/location/search/?lattlong=${lat.toString()},${lon.toString()}');
     if (locationResponse.statusCode == 200) {
       locationData = new LocationData.fromJson(jsonDecode(locationResponse.body));
