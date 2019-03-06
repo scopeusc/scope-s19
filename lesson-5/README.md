@@ -362,36 +362,33 @@ Additionally, we'll be displaying a card showing each weather data from each ele
 This method is where our calls to the MetaWeather API go.  We'll be using the endpoints detailed above to request the weather data at USC's latitude and longitude.  The following code snippet:
 1. Makes a call to the MetaWeather API using USC's latitude and longitude to get our WOEID.
 2. Verifies that a response was received and no error status codes were returned.
-3. Makes two more calls to the MetaWeather API to acquire the current and forecast weather information.
+3. Makes another call to the MetaWeather API to acquire the current and forecast weather information.
 4. Constructs the `weatherData` and `forecastData` instances.
 
 Include the following code snippet withing `loadWeather()`:
 ```dart
-    setState(() {
-      isLoading = true;
-    });
-
-    final lat = 34.0224;
-    final lon = -118.2851;
-    final locationResponse = await http.get('https://www.metaweather.com/api/location/search/?lattlong=${lat.toString()},${lon.toString()}');
-    if (locationResponse.statusCode == 200) {
-      locationData = new LocationData.fromJson(jsonDecode(locationResponse.body));
-      final weatherResponse = await http.get(
-          'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
-      final forecastResponse = await http.get(
-          'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
-      if (weatherResponse.statusCode == 200 &&
-          forecastResponse.statusCode == 200) {
-        return setState(() {
-          weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
-          forecastData = new ForecastData.fromJson(jsonDecode(forecastResponse.body));
+        setState(() {
+          isLoading = true;
+        });
+    
+        final lat = 34.0224;
+        final lon = -118.2851;
+        final locationResponse = await http.get('https://www.metaweather.com/api/location/search/?lattlong=${lat.toString()},${lon.toString()}');
+        if (locationResponse.statusCode == 200) {
+          locationData = new LocationData.fromJson(jsonDecode(locationResponse.body));
+          final weatherResponse = await http.get(
+              'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
+          if (weatherResponse.statusCode == 200) {
+            return setState(() {
+              weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
+              forecastData = new ForecastData.fromJson(jsonDecode(weatherResponse.body));
+              isLoading = false;
+            });
+          }
+        }
+        setState(() {
           isLoading = false;
         });
-      }
-    }
-    setState(() {
-      isLoading = false;
-    });
 ```
 
 ## Part 5 - Test It Out!

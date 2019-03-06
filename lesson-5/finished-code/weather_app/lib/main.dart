@@ -100,13 +100,10 @@ class MyAppState extends State<MyApp> {
       locationData = new LocationData.fromJson(jsonDecode(locationResponse.body));
       final weatherResponse = await http.get(
           'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
-      final forecastResponse = await http.get(
-          'https://www.metaweather.com/api/location/${locationData.woeid.toString()}/');
-      if (weatherResponse.statusCode == 200 &&
-          forecastResponse.statusCode == 200) {
+      if (weatherResponse.statusCode == 200) {
         return setState(() {
           weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
-          forecastData = new ForecastData.fromJson(jsonDecode(forecastResponse.body));
+          forecastData = new ForecastData.fromJson(jsonDecode(weatherResponse.body));
           isLoading = false;
         });
       }
